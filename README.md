@@ -1,2 +1,2 @@
-# Personal-Hub-Web-App
-Central hub for callendar todo lists and productivity tools
+# Kernl
+Kernl is the central hub for all calendars, to-do lists, and productivity tools you will ever need.
