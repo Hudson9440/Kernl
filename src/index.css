@@ -1,3 +1,16 @@
+.Task-List{
+  list-style-type: none;
+  font-size: larger;
+}
+.Task{
+  display: flex;  
+  justify-content: center; /* Centers horizontally */
+  align-items: center;/* or display: grid; */
+  gap: 20px;
+}
+.Delete-Button{
+  background-color: rgb(172, 5, 5);
+}
 :root {
   --text: #6b6375;
   --text-h: #08060d;

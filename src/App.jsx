@@ -1,9 +1,7 @@
 import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import My_Component from './My_Component.jsx'
-import './App.css'
+import Kernl_Logo from './assets/kernl_logo.svg'
+import './index.css'
+import ToDoList from './ToDoList.jsx'
 
 function App() {
   const [count, setCount] = useState(1)
@@ -12,9 +10,9 @@ function App() {
     <>
       <section id="center">
         <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
+          <img src={Kernl_Logo} className="base" width="170" height="179" alt="" />
         </div>
-        <My_Component />
+        <ToDoList />
       </section>
     </>
   )
