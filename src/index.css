@@ -1,15 +1,84 @@
+.FormInput{
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 1rem;
+  color: #111827;
+  background-color: #ffffff;
+  border: 1.5px solid #D1D5DB;
+  border-radius: 8px;
+  outline: none;
+  box-sizing: border-box;
+
+}
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent */
+  display: flex;
+  justify-content: center; /* Centers form horizontally */
+  align-items: center;     /* Centers form vertically */
+  z-index: 999;
+}
+.AddForm {
+  background-color: white;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 450px;       
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.ExitButton {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center; 
+  align-content: center; 
+  font-size: 35px;
+  height: 40px;
+  width: 40px;
+  border-radius: 8px;
+  background-color: white;
+  position: absolute;       
+  top: 10px;                
+  right: 10px;    
+  cursor: pointer;
+}
 .Task-List{
+  display: grid;  
+  justify-content: center;
   list-style-type: none;
-  font-size: larger;
+  font-size: 25px;
+  gap: 10px;
+
 }
 .Task{
   display: flex;  
-  justify-content: center; /* Centers horizontally */
-  align-items: center;/* or display: grid; */
-  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #656268;
+  width: 600px;
+  padding: 8px;
+  border-radius: 8px;  
 }
-.Delete-Button{
-  background-color: rgb(172, 5, 5);
+.Task-Name{
+  color: rgb(0, 0, 0);
+  font-size: larger;
+}
+.Checkbox{
+  display: inline-flex;
+  
+  height: 17px;
+  width: 17px;
+}
+.AddButton{
+  height: 50px;
+  width: 75px;
+  font-size: 30px;
+  background-color: green;
 }
 :root {
   --text: #6b6375;
