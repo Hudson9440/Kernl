@@ -1,10 +1,8 @@
-import { useState } from 'react'
 import Kernl_Logo from './assets/kernl_logo.svg'
 import './index.css'
 import ToDoList from './ToDoList.jsx'
 
 function App() {
-  const [count, setCount] = useState(1)
 
   return (
     <>
