@@ -1,4 +1,5 @@
 import { useState } from "react";
+import 'normalize.css'
 
 function ToDoList() {
   const [tasks, setTasks] = useState(["mike"]);
@@ -15,6 +16,7 @@ function ToDoList() {
   }
 
   function closeAddTask() {
+    
     setAddFormIsOpen(false);
   }
 
