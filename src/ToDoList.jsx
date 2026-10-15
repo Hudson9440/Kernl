@@ -1,5 +1,5 @@
 import { useState } from "react";
-import 'normalize.css'
+import 'normalize.css';
 
 function ToDoList() {
   const [tasks, setTasks] = useState(["mike"]);
@@ -16,7 +16,7 @@ function ToDoList() {
   }
 
   function closeAddTask() {
-    
+
     setAddFormIsOpen(false);
   }
 
@@ -41,7 +41,7 @@ function ToDoList() {
   }
 
   return (
-    <div>
+    <div className="ToDoList">
       <h1>ToDo List</h1>
       <button className="AddButton" onClick={openAddTask}>
         ADD

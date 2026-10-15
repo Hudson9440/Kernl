@@ -1,3 +1,8 @@
+.ToDoList{
+  padding: 8px;
+  border-radius: 8px;
+  background-color: #2e303a;
+}
 .FormInput{
   width: 100%;
   padding: 10px 14px;
