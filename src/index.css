@@ -75,7 +75,6 @@
 }
 .Checkbox{
   display: inline-flex;
-  
   height: 17px;
   width: 17px;
 }
@@ -84,6 +83,7 @@
   width: 75px;
   font-size: 30px;
   background-color: green;
+  color: #e5e4e7;
 }
 :root {
   --text: #6b6375;
