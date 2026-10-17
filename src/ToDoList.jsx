@@ -1,13 +1,10 @@
 import { useState } from "react";
-import 'normalize.css';
+import CloseIcon from "./assets/close-icon.svg";
 
 function ToDoList() {
-  const [tasks, setTasks] = useState(["mike"]);
-  const [newTask, setNewTask] = useState("");
-
-  function handleInputChange(event) {
-    setNewTask(event.target.value);
-  }
+  const [tasks, setTasks] = useState([]);
+  const [newTaskText, setNewTaskText] = useState("");
+  const [newTaskPriority, setNewTaskPriority] = useState("High");
 
   const [AddFormisOpen, setAddFormIsOpen] = useState(false);
 
@@ -16,24 +13,25 @@ function ToDoList() {
   }
 
   function closeAddTask() {
-
     setAddFormIsOpen(false);
   }
 
-  function handleSubmit() {
-    event.preventDefault()
+  function handleSubmit(event) {
+    event.preventDefault();
     addTask();
     closeAddTask();
   }
 
   function addTask() {
-    
-    if (newTask.trim() !== "") {
+    if (newTaskText.trim() !== "") {
+      const newTask = {
+        index: `el-${crypto.randomUUID()}`,
+        text: newTaskText,
+        priority: newTaskPriority,
+      };
+      setNewTaskText("");
       setTasks((t) => [...t, newTask]);
-      setNewTask("");
-      console.log("submited");
     }
-    console.log("submited2");
   }
 
   function deleteTask(index) {
@@ -42,46 +40,58 @@ function ToDoList() {
 
   return (
     <div className="ToDoList">
-      <h1>ToDo List</h1>
-      <button className="AddButton" onClick={openAddTask}>
-        ADD
-      </button>
+      <button className="SubtleButton">today</button> {/* Add date selector */}
       {AddFormisOpen && (
         <div className="Overlay">
           <div className="AddForm">
             <button className="ExitButton" onClick={closeAddTask}>
-              <img src="src/assets/close-icon.svg"/>
+              <img src={CloseIcon} />
             </button>
-            <div className="AddFormContent">
-              <form onSubmit={handleSubmit}>
-                <input
-                  className="FormInput"
-                  type="text"
-                  autoFocus
-                  placeholder="Enter Task Name"
-                  value={newTask}
-                  onChange={handleInputChange}
-                ></input>
-              </form>
-            </div>
+
+            <form className="AddFormContent" onSubmit={handleSubmit}>
+              <input
+                className="FormInputText"
+                type="text"
+                autoFocus
+                placeholder="Enter Task Name"
+                value={newTaskText}
+                onChange={(e) => setNewTaskText(e.target.value)}
+              ></input>
+              <div className="small-spacer"></div>
+              <label for="Priority">Priority </label>
+              <select
+                name="Priority"
+                id="Priority"
+                className="FormInputPriority"
+                value={newTaskPriority}
+                onChange={(e) => setNewTaskPriority(e.target.value)}
+              >
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+              </select>
+              <div>
+                <button type="submit" className="SubtleButton">
+                  Submit
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}
       <ol className="Task-List">
-        {tasks.map((task, index) => (
-          <li className="Task" key={index}>
-            <input
-              type="checkbox"
-              className="Checkbox"
-              onClick={() => deleteTask(index)}
-              checked={false}
-              readOnly
-            ></input>
+        {tasks.map((task) => (
+          <li className="Task" key={task.index}>
+            <input type="checkbox" className="Checkbox"></input>
             {/* () => becasue without ity it calles the function instantly */}
-            <span className="Task-Name">{task}</span>
+            <span className="Task-Name">{task.text}</span>
+            <span className="Priority">{task.priority}</span>
           </li>
         ))}
       </ol>
+      <button className="SubtleButton" onClick={openAddTask}>
+        + Add a task
+      </button>
     </div>
   );
 }

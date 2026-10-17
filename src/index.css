@@ -1,19 +1,55 @@
+@import 'normalize.css';
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* outline: 3px solid limegreen !important; */
+}
+body{
+  background-color: var(--primary-color);
+}
+.center{
+  background-color: var(--primary-color);
+}
+.ControleCenter{
+  position: fixed;
+  left: 0;
+  background-color: var(--detail-color);
+  z-index: 100;
+  width: 100vw;
+  height: 2.5vw;
+}
+.Spacer{
+  height: 3.5vw;
+}
+.Logo{
+  position: fixed;
+  width: 2.5vw;
+  height: 2.5vw;
+  left: 0;
+}
 .ToDoList{
   padding: 8px;
   border-radius: 8px;
-  background-color: #2e303a;
+  background-color: var(--Widget-color);
 }
-.FormInput{
+.FormInputText{
+  gap: 16px;
   width: 100%;
   padding: 10px 14px;
   font-size: 1rem;
-  color: #111827;
-  background-color: #ffffff;
+  color: #ffffff;
+  background-color: var(--component-color);
   border: 1.5px solid #D1D5DB;
   border-radius: 8px;
   outline: none;
   box-sizing: border-box;
-
+}
+.Priority{
+  margin-left: auto;
+}
+.FormInputPriority{
+  background-color: var(--component-color);
 }
 .Overlay {
   position: fixed;
@@ -28,17 +64,26 @@
   z-index: 999;
 }
 .AddForm {
-  background-color: white;
+  display: flex;         
+  flex-direction: column;
+  background-color: var(--Widget-color);
   padding: 24px;
   border-radius: 8px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  width: 90%;
   max-width: 450px;       
   box-sizing: border-box;
   cursor: pointer;
 }
+.addFormContent{
+  display: flex;         
+  flex-direction: column;
+  gap: 16px;
+}
+.small-spacer{
+  height: 1vw;
+}
 .ExitButton {
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   align-items: center; 
   align-content: center; 
@@ -57,35 +102,63 @@
   justify-content: center;
   list-style-type: none;
   font-size: 25px;
+  width: 100%;
   gap: 10px;
-
 }
 .Task{
   display: flex;  
   align-items: center;
-  justify-content: space-between;
-  background-color: #656268;
-  width: 60vw;
+  gap: 10px;
+  border-bottom: 3px solid var(--detail-color);
+  width: 50vw;
   padding: 8px;
-  border-radius: 8px;  
 }
 .Task-Name{
-  color: rgb(0, 0, 0);
+  color: var(--text-color);
   font-size: larger;
 }
 .Checkbox{
+  appearance: none;
+  border: 2px solid #999999;     /* Unchecked border color */
+  border-radius: 7px;
+  cursor: pointer;
   display: inline-flex;
+  background-color: white;
   height: 17px;
   width: 17px;
 }
-.AddButton{
-  height: 50px;
-  width: 75px;
+.Checkbox:checked{
+  appearance: auto;
+  -webkit-appearance: checkbox;
+  accent-color: #fffc58; 
+}
+
+.SubtleButton{
+  background-color: transparent;
+  left:0;
+  padding: 3px;
+  border-radius: 6px;
   font-size: 30px;
-  background-color: green;
-  color: #e5e4e7;
+  border-color: transparent;
+  color: #6b6375;
+  cursor: pointer;
+}
+.SubtleButton:hover{
+  background-color: var(--component-color);
+  left:0;
+  padding: 3px;
+  border-radius: 6px;
+  font-size: 30px;
+  border-color: transparent;
+  color: #6b6375;
+  cursor: pointer;
 }
 :root {
+  --primary-color: rgb(12, 14, 53);
+  --Widget-color: rgb(22, 24, 63);
+  --detail-color: rgb(32,34,73);
+  --component-color: rgb(62,64,103);
+  --text-color: rgb(102,104,143);
   --text: #6b6375;
   --text-h: #08060d;
   --bg: #fff;
@@ -146,7 +219,6 @@ body {
   max-width: 100%;
   margin: 0 auto;
   text-align: center;
-  border-inline: 1px solid var(--border);
   min-height: 100svh;
   display: flex;
   flex-direction: column;

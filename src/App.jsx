@@ -7,9 +7,11 @@ function App() {
   return (
     <>
       <section id="center">
-        <div className="hero">
-          <img src={Kernl_Logo} className="base" width="170" height="179" alt="" />
+        <div className="ControleCenter">
+          <img src={Kernl_Logo} className="Logo" width="170" height="179" alt="" />
         </div>
+        <div className='Spacer'></div>
+        
         <ToDoList />
       </section>
     </>
