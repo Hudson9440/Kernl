@@ -1,6 +1,7 @@
 import { useState } from "react";
 import CloseIcon from "./assets/close-icon.svg";
 import NavBar from "./NavagationBar.jsx";
+import './ToDoList.css'
 
 function ToDoList() {
   const [tasks, setTasks] = useState([]);
@@ -40,13 +41,14 @@ function ToDoList() {
   }
 
   return (
+    <>
+    <NavBar />
     <div className="ToDoList">
-      <NavBar />
-      <button className="SubtleButton">today</button> {/* Add date selector */}
+      <button className="SubtleButton">Today</button> {/* Add date selector */}
       {AddFormisOpen && (
         <div className="Overlay">
           <div className="AddForm">
-            <button className="ExitButton" onClick={closeAddTask}>
+            <button className="ExitButton" onClick={closeAddTask}> {/* Make it so anywhere you click it closes and turn div Add Form to Modal*/}
               <img src={CloseIcon} />
             </button>
 
@@ -59,7 +61,6 @@ function ToDoList() {
                 value={newTaskText}
                 onChange={(e) => setNewTaskText(e.target.value)}
               ></input>
-              <div className="small-spacer"></div>
               <label for="Priority">Priority </label>
               <select
                 name="Priority"
@@ -94,7 +95,9 @@ function ToDoList() {
       <button className="SubtleButton" onClick={openAddTask}>
         + Add a task
       </button>
+      {/* Add a delete task button which adds a chaeckbox and a final delete button actually deleting all elements selected*/}
     </div>
+    </>
   );
 }
 

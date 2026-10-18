@@ -1,18 +1,15 @@
-import './index.css'
-import { useNavigate } from 'react-router-dom';
+import './Home.css';
 import NavBar from './NavagationBar.jsx';
+import './Global.css'
 
-function Home() {
-  const navigate = useNavigate();
+export default function Home() {
 
   return (
     <div>
-        <button className="ControleCenterButton" onClick={() => navigate('/Kernl/ToDoList')}>ToDoList</button>
-        <button className="ControleCenterButton" onClick={() => navigate('/Kernl')}>Home</button>
         <NavBar/>
-        <h1 className='Title'>Welcome to Kernl!</h1>
+        <h1 className='Text'>Welcome to Kernl!</h1>
+        <p className='Text'>Kernl Is Designed to be a one stop shop for all your productivity and organizational needs.</p>
+        <p className='Text'>Simply navagate around using the Navagation Bar at the top of your screen or your search engines forward and backwards arrows and ENJOY</p>
     </div>
   );
 }
-
-export default Home;

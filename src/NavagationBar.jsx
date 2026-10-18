@@ -1,7 +1,7 @@
 
 import Kernl_Logo from './assets/kernl_logo.svg'
 import { useNavigate } from 'react-router-dom';
-import './index.css'
+import './Global.css'
 
 export default function NavBar() {
     const navigate = useNavigate();
@@ -9,8 +9,9 @@ export default function NavBar() {
     return (
         <>
             <div className="ControleCenter">
-                <img src={Kernl_Logo} className="Logo" width="170" height="179" alt="" />
+                <img src={Kernl_Logo} className="Logo" alt="" />
                 <button className="ControleCenterButton" onClick={() => navigate('/Kernl/ToDoList')}>ToDoList</button>
+                <button className="ControleCenterButton" onClick={() => navigate('/Kernl/Calendar')}>Calendar</button>
                 <button className="ControleCenterButton" onClick={() => navigate('/Kernl')}>Home</button>
             </div>
             <div className='Spacer'></div>
