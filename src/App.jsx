@@ -1,21 +1,19 @@
-import Kernl_Logo from './assets/kernl_logo.svg'
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import './index.css'
 import ToDoList from './ToDoList.jsx'
+import Home from './Home.jsx'
 
-function App() {
+
+
+
+export default function App() {
 
   return (
-    <>
-      <section id="center">
-        <div className="ControleCenter">
-          <img src={Kernl_Logo} className="Logo" width="170" height="179" alt="" />
-        </div>
-        <div className='Spacer'></div>
-        
-        <ToDoList />
-      </section>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/Kernl" element={<Home />} />
+        <Route path="/Kernl/ToDoList" element={<ToDoList />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
-
-export default App

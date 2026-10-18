@@ -1,5 +1,6 @@
 import { useState } from "react";
 import CloseIcon from "./assets/close-icon.svg";
+import NavBar from "./NavagationBar.jsx";
 
 function ToDoList() {
   const [tasks, setTasks] = useState([]);
@@ -40,6 +41,7 @@ function ToDoList() {
 
   return (
     <div className="ToDoList">
+      <NavBar />
       <button className="SubtleButton">today</button> {/* Add date selector */}
       {AddFormisOpen && (
         <div className="Overlay">
