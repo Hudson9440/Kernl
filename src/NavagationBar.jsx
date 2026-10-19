@@ -10,9 +10,9 @@ export default function NavBar() {
         <>
             <div className="ControleCenter">
                 <img src={Kernl_Logo} className="Logo" alt="" />
-                <button className="ControleCenterButton" onClick={() => navigate('/Kernl/ToDoList')}>ToDoList</button>
-                <button className="ControleCenterButton" onClick={() => navigate('/Kernl/Calendar')}>Calendar</button>
-                <button className="ControleCenterButton" onClick={() => navigate('/Kernl')}>Home</button>
+                <button className="ControleCenterButton" onClick={() => navigate('/ToDoList')}>ToDoList</button>
+                <button className="ControleCenterButton" onClick={() => navigate('/Calendar')}>Calendar</button>
+                <button className="ControleCenterButton" onClick={() => navigate('/')}>Home</button>
             </div>
             <div className='Spacer'></div>
         </>
