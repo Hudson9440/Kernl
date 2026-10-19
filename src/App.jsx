@@ -12,9 +12,9 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/Kernl" element={<Home />} />
-        <Route path="/Kernl/ToDoList" element={<ToDoList />} />
-        <Route path="/Kernl/Calendar" element={<Calendar />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/ToDoList" element={<ToDoList />} />
+        <Route path="/Calendar" element={<Calendar />} />
       </Routes>
     </BrowserRouter>
   )
