@@ -95,7 +95,7 @@ function ToDoList() {
       <button className="SubtleButton" onClick={openAddTask}>
         + Add a task
       </button>
-      {/* Add a delete task button which adds a chaeckbox and a final delete button actually deleting all elements selected*/}
+      {/* Add a delete task button which adds a checkbox and a final delete button actually deleting all elements selected*/}
     </div>
     </>
   );
