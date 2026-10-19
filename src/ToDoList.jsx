@@ -1,7 +1,10 @@
 import { useState } from "react";
 import CloseIcon from "./assets/close-icon.svg";
 import NavBar from "./NavagationBar.jsx";
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/style.css";
 import './ToDoList.css'
+import './Global.css'
 
 function ToDoList() {
   const [tasks, setTasks] = useState([]);
@@ -24,6 +27,12 @@ function ToDoList() {
     closeAddTask();
   }
 
+  function handleSubmitDate(event) {
+    event.preventDefault();
+    setday(selected);
+    setIsDateSelectorOpen(false);
+  }
+
   function addTask() {
     if (newTaskText.trim() !== "") {
       const newTask = {
@@ -40,63 +49,91 @@ function ToDoList() {
     setTasks(tasks.filter((_, i) => i !== index));
   }
 
+  const [isDateSelectorOpen, setIsDateSelectorOpen] = useState(false);
+  
+  const [day, setday] = useState(new Date());
+  const [selected, setSelected] = useState(new Date());
+   
   return (
     <>
-    <NavBar />
-    <div className="ToDoList">
-      <button className="SubtleButton">Today</button> {/* Add date selector */}
-      {AddFormisOpen && (
-        <div className="Overlay">
-          <div className="AddForm">
-            <button className="ExitButton" onClick={closeAddTask}> {/* Make it so anywhere you click it closes and turn div Add Form to Modal*/}
-              <img src={CloseIcon} />
-            </button>
-
-            <form className="AddFormContent" onSubmit={handleSubmit}>
-              <input
-                className="FormInputText"
-                type="text"
-                autoFocus
-                placeholder="Enter Task Name"
-                value={newTaskText}
-                onChange={(e) => setNewTaskText(e.target.value)}
-              ></input>
-              <label for="Priority">Priority </label>
-              <select
-                name="Priority"
-                id="Priority"
-                className="FormInputPriority"
-                value={newTaskPriority}
-                onChange={(e) => setNewTaskPriority(e.target.value)}
-              >
-                <option value="High">High</option>
-                <option value="Medium">Medium</option>
-                <option value="Low">Low</option>
-              </select>
-              <div>
+      <NavBar />
+      <div className="ToDoList">
+        <button className="SubtleButton Text" onClick={() => setIsDateSelectorOpen(true)}>{day.toLocaleDateString()}</button> 
+        {isDateSelectorOpen &&
+          <div className="Overlay">
+            <div className="AddForm">
+              <form className="AddFormContent" onSubmit={handleSubmitDate}>
+                <button className="ExitButton" type="button" onClick={() => setIsDateSelectorOpen(false)}> {/* Save Tasks to the day */}
+                  <img src={CloseIcon} />
+                </button>
+                <DayPicker
+                  mode="single"
+                  selected={selected}
+                  onSelect={setSelected}
+                  defaultMonth={new Date()}
+                  footer={
+                    selected ? `Selected: ${selected.toLocaleDateString()}` : "Pick a day."
+                  }
+                />
                 <button type="submit" className="SubtleButton">
                   Submit
                 </button>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
-        </div>
-      )}
-      <ol className="Task-List">
-        {tasks.map((task) => (
-          <li className="Task" key={task.index}>
-            <input type="checkbox" className="Checkbox"></input>
-            {/* () => becasue without ity it calles the function instantly */}
-            <span className="Task-Name">{task.text}</span>
-            <span className="Priority">{task.priority}</span>
-          </li>
-        ))}
-      </ol>
-      <button className="SubtleButton" onClick={openAddTask}>
-        + Add a task
-      </button>
-      {/* Add a delete task button which adds a checkbox and a final delete button actually deleting all elements selected*/}
-    </div>
+        }
+        {AddFormisOpen && (
+          <div className="Overlay">
+            <div className="AddForm">
+              <button className="ExitButton" onClick={closeAddTask}> {/* Make it so anywhere you click it closes and turn div Add Form to Modal*/}
+                <img src={CloseIcon} />
+              </button>
+
+              <form className="AddFormContent" onSubmit={handleSubmit}>
+                <input
+                  className="FormInputText"
+                  type="text"
+                  autoFocus
+                  placeholder="Enter Task Name"
+                  value={newTaskText}
+                  onChange={(e) => setNewTaskText(e.target.value)}
+                ></input>
+                <label for="Priority">Priority </label>
+                <select
+                  name="Priority"
+                  id="Priority"
+                  className="FormInputPriority"
+                  value={newTaskPriority}
+                  onChange={(e) => setNewTaskPriority(e.target.value)}
+                >
+                  <option value="High">High</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Low">Low</option>
+                </select>
+                <div>
+                  <button type="submit" className="SubtleButton Text">
+                    Submit
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+        <ol className="Task-List">
+          {tasks.map((task) => (
+            <li className="Task" key={task.index}>
+              <input type="checkbox" className="Checkbox"></input>
+              {/* () => becasue without ity it calles the function instantly */}
+              <span className="Task-Name">{task.text}</span>
+              <span className="Priority">{task.priority}</span>
+            </li>
+          ))}
+        </ol>
+        <button className="SubtleButton Text" onClick={openAddTask}>
+          + Add a task
+        </button>
+        {/* Add a delete task button which adds a checkbox and a final delete button actually deleting all elements selected*/}
+      </div>
     </>
   );
 }

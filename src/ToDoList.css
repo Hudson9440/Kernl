@@ -6,12 +6,16 @@
   /* background-color: rgb(0 100 0 / 0.1) !important; */
   /* background-color: 3px solid limegreen !important; */
 }
-
+.Text {
+  color: var(--text-color);
+}
 .ControleCenterButton {
+  display: flex;
   background-color: transparent;
   left:0;
-  padding: 3px;
-  font-size: 30px;
+  top:0;
+  padding: .5vw;
+  font-size: 1.75vw;
   border-left-color: var(--detail-color);
   border-right-color: var(--detail-color);
   border-top-color: transparent;
@@ -32,13 +36,13 @@ body{
   position: absolute;
   left: 0;
   Top: 0;
-
   background-color: var(--detail-color);
   z-index: 100;
   width: 100vw;
   height: 2.5vw;
 }
 .Logo{
+  display: flex;
   position: absolute;
   width: 2.5vw;
   height: 2.5vw;
@@ -91,11 +95,6 @@ body{
   box-sizing: border-box;
   cursor: pointer;
 }
-.addFormContent{
-  display: flex;         
-  flex-direction: column;
-  gap: 16px;
-}
 .small-spacer{
   height: 1vw;
 }
@@ -104,31 +103,30 @@ body{
   justify-content: center;
   align-items: center; 
   align-content: center; 
-  font-size: 35px;
-  height: 40px;
-  width: 40px;
-  border-radius: 8px;
+  height: 2.5vw;
+  width: 2.5vw;
+  border-radius: .5vw;
   background-color: white;
   position: absolute;       
-  top: 10px;                
-  right: 10px;    
+  top: .5vw;                
+  right: .5vw;    
   cursor: pointer;
 }
 .Task-List{
   display: grid;  
   justify-content: center;
   list-style-type: none;
-  font-size: 25px;
+  font-size: 1.5vw;
   width: 100%;
-  gap: 10px;
+
 }
 .Task{
   display: flex;  
   align-items: center;
-  gap: 10px;
-  border-bottom: 3px solid var(--detail-color);
-  width: 50vw;
-  padding: 8px;
+  gap: .5vw;
+  border-bottom: .15vw solid var(--detail-color);
+  min-width: 50vw;
+  padding: .5vw;
 }
 .Task-Name{
   color: var(--text-color);
@@ -141,8 +139,8 @@ body{
   cursor: pointer;
   display: inline-flex;
   background-color: white;
-  height: 17px;
-  width: 17px;
+  min-height: 17px;
+  min-width: 17px;
 }
 .Checkbox:checked{
   appearance: auto;
@@ -153,21 +151,19 @@ body{
 .SubtleButton{
   background-color: transparent;
   left:0;
-  padding: 3px;
-  border-radius: 6px;
-  font-size: 30px;
+  padding: .5vw;
+  border-radius: .5vw;
+  font-size: 2vw;
   border-color: transparent;
-  color: #6b6375;
   cursor: pointer;
 }
 .SubtleButton:hover{
   background-color: var(--component-color);
   left:0;
-  padding: 3px;
-  border-radius: 6px;
-  font-size: 30px;
+  padding: .5vw;
+  border-radius: .5vw;
+  font-size: 2vw;
   border-color: transparent;
-  color: #6b6375;
   cursor: pointer;
 }
 :root {
@@ -175,7 +171,7 @@ body{
   --Widget-color: rgb(22, 24, 63);
   --detail-color: rgb(32,34,73);
   --component-color: rgb(62,64,103);
-  --text-color: rgb(102,104,143);
+  --text-color: #afbfff;
   --text: #6b6375;
   --text-h: #08060d;
   --bg: #fff;
