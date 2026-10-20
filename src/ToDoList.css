@@ -95,6 +95,10 @@ body{
   box-sizing: border-box;
   cursor: pointer;
 }
+.Spacer{
+  display: flex;
+  height: 3.5rem;
+}
 .small-spacer{
   height: 0.0625rem;
 }
