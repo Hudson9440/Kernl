@@ -14,8 +14,8 @@
   background-color: transparent;
   left:0;
   top:0;
-  padding: .5vw;
-  font-size: 1.75vw;
+  padding: .5rem;
+  font-size: 1.75rem;
   border-left-color: var(--detail-color);
   border-right-color: var(--detail-color);
   border-top-color: transparent;
@@ -39,30 +39,30 @@ body{
   background-color: var(--detail-color);
   z-index: 100;
   width: 100vw;
-  height: 2.5vw;
+  height: 2.5rem;
 }
 .Logo{
   display: flex;
   position: absolute;
-  width: 2.5vw;
-  height: 2.5vw;
+  width: 2.5rem;
+  height: 2.5rem;
   left: 0;
 }
 .ToDoList{
   position: flex;
-  padding: 8px;
-  border-radius: 8px;
+  padding: .5rem;
+  border-radius: .5rem;
   background-color: var(--Widget-color);
 }
 .FormInputText{
-  gap: 16px;
+  gap: 1rem;
   width: 100%;
-  padding: 10px 14px;
+  padding: .625rem .875rem;
   font-size: 1rem;
   color: #ffffff;
   background-color: var(--component-color);
-  border: 1.5px solid #D1D5DB;
-  border-radius: 8px;
+  border: .09375rem solid #D1D5DB;
+  border-radius: .5rem;
   outline: none;
   box-sizing: border-box;
 }
@@ -88,45 +88,45 @@ body{
   display: flex;         
   flex-direction: column;
   background-color: var(--Widget-color);
-  padding: 24px;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  max-width: 450px;       
+  padding: 1.5rem;
+  border-radius: .5rem;
+  box-shadow: 0 .25rem 1rem rgba(0, 0, 0, 0.2);
+  max-width: 28.125rem;       
   box-sizing: border-box;
   cursor: pointer;
 }
 .small-spacer{
-  height: 1vw;
+  height: 0.0625rem;
 }
 .ExitButton {
   display: flex;
   justify-content: center;
   align-items: center; 
   align-content: center; 
-  height: 2.5vw;
-  width: 2.5vw;
-  border-radius: .5vw;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: .5rem;
   background-color: white;
   position: absolute;       
-  top: .5vw;                
-  right: .5vw;    
+  top: .5rem;                
+  right: .5rem;    
   cursor: pointer;
 }
 .Task-List{
   display: grid;  
   justify-content: center;
   list-style-type: none;
-  font-size: 1.5vw;
+  font-size: 1.5rem;
   width: 100%;
 
 }
 .Task{
   display: flex;  
   align-items: center;
-  gap: .5vw;
-  border-bottom: .15vw solid var(--detail-color);
-  min-width: 50vw;
-  padding: .5vw;
+  gap: .5rem;
+  border-bottom: .15rem solid var(--detail-color);
+  width: 50rem;
+  padding: .5rem;
 }
 .Task-Name{
   color: var(--text-color);
@@ -134,13 +134,13 @@ body{
 }
 .Checkbox{
   appearance: none;
-  border: 2px solid #999999;     /* Unchecked border color */
-  border-radius: 7px;
+  border: 0.125rem solid #999999;     /* Unchecked border color */
+  border-radius: .5rem;
   cursor: pointer;
   display: inline-flex;
   background-color: white;
-  min-height: 17px;
-  min-width: 17px;
+  min-height: 1rem;
+  min-width: 1rem;
 }
 .Checkbox:checked{
   appearance: auto;
@@ -151,18 +151,18 @@ body{
 .SubtleButton{
   background-color: transparent;
   left:0;
-  padding: .5vw;
-  border-radius: .5vw;
-  font-size: 2vw;
+  padding: .5rem;
+  border-radius: .5rem;
+  font-size: 2rem;
   border-color: transparent;
   cursor: pointer;
 }
 .SubtleButton:hover{
   background-color: var(--component-color);
   left:0;
-  padding: .5vw;
-  border-radius: .5vw;
-  font-size: 2vw;
+  padding: .5rem;
+  border-radius: .5rem;
+  font-size: 2rem;
   border-color: transparent;
   cursor: pointer;
 }

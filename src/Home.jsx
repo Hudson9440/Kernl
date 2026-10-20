@@ -1,6 +1,6 @@
-import './Home.css';
 import NavBar from './NavagationBar.jsx';
 import './Global.css'
+import './Home.css';
 
 export default function Home() {
 
