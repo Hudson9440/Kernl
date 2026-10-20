@@ -15,8 +15,8 @@
   background-color: transparent;
   left:0;
   top:0;
-  padding: .5rem;
-  font-size: 1.75rem;
+
+  font-size: 1rem;
   border-left-color: var(--detail-color);
   border-right-color: var(--detail-color);
   border-top-color: transparent;
