@@ -10,6 +10,7 @@
   color: var(--text-color);
 }
 .ControleCenterButton {
+  margin-left: 2.5rem;
   display: flex;
   background-color: transparent;
   left:0;
