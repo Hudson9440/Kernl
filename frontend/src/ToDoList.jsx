@@ -1,60 +1,133 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CloseIcon from "./assets/close-icon.svg";
 import NavBar from "./NavagationBar.jsx";
 import { DayPicker } from "react-day-picker";
-import axios from 'axios';
+import axios from "axios";
 import "react-day-picker/style.css";
-import './ToDoList.css'
-import './Global.css'
+import "./ToDoList.css";
+import "./Global.css";
 
-const API_URL = 'http://127.0.0.1:8000/api/tasks/';
+const API_URL = "http://127.0.0.1:8000/api/tasks/";
+
+function toDateKey(d) {
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const dayOfMonth = String(d.getDate()).padStart(2, "0");
+  return `${d.getFullYear()}-${month}-${dayOfMonth}`;
+}
 
 function ToDoList() {
   const [tasks, setTasks] = useState([]);
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("High");
-  const [done, setDone] = useState(false);
   const [AddFormisOpen, setAddFormIsOpen] = useState(false);
+  const [deleteTaskMode, setDeleteTaskMode] = useState(false);
+  const [editTaskMode, setEditTaskMode] = useState(false);
+  const [editingTaskId, setEditingTaskId] = useState(null);
+  const [isDateSelectorOpen, setIsDateSelectorOpen] = useState(false);
+  const [day, setday] = useState(new Date());
+  const [selected, setSelected] = useState(new Date());
 
+  const visibleTasks = tasks.filter((task) => task.date === toDateKey(day));
 
-  const fetchItems = async () => {
+  async function fetchItems() {
     try {
       const response = await axios.get(API_URL);
       setTasks(response.data);
     } catch (error) {
-      console.error('Error Fetching Data!!: ', error);
+      console.error("Error fetching data:", error);
     }
   }
 
-  const WriteData = async (e) => {
-    e.preventDefault();
-    try {
-      closeAddTask();
-      const response = await axios.post(API_URL, { name, description, priority, done});
-      setTasks([...tasks, response.data]);
-      setName('');
-      setDescription('');
-      setPriority("High");
-      setDone(false);
-      console.log("Successfuly added Task:", response.data);
-    } catch (error) {
-      console.error('Error writing data:', error.message, error.code, error)
-    }
-  };
+  useEffect(() => {
+    fetchItems();
+  }, []);
 
-  
-  const DeleteData = async (id) => {
+  async function WriteData(e) {
+    e.preventDefault();
+    if (name.trim() === "") return;
+    try {
+      const response = await axios.post(API_URL, {
+        name,
+        description,
+        priority,
+        date: toDateKey(day),
+      });
+      setTasks((t) => [...t, response.data]);
+      setName("");
+      setDescription("");
+      setPriority("High");
+      closeAddTask();
+      console.log("Successfully added Task:", response.data);
+    } catch (error) {
+      console.error(
+        "Error writing data:",
+        error.response?.data ?? error.message,
+      );
+    }
+  }
+
+  async function DeleteData(id) {
     try {
       await axios.delete(`${API_URL}${id}/`);
-      setTasks(tasks.filter((item) => item.id !== id)); // Remove deleted item from state
+      setTasks((t) => t.filter((item) => item.id !== id));
     } catch (error) {
-      console.error('Error deleting data!:', error);
+      console.error("Error deleting data:", error);
     }
-  };
+  }
 
+  async function UpdateCheckBoxState(id, changes) {
+    try {
+      const response = await axios.patch(`${API_URL}${id}/`, changes);
+      setTasks((t) => t.map((task) => (task.id === id ? response.data : task)));
+    } catch (error) {
+      console.error(
+        "Error updating data:",
+        error.response?.data ?? error.message,
+      );
+    }
+  }
 
+  async function UpdateData(id) {
+    try {
+      const response = await axios.patch(`${API_URL}${id}/`, {
+        name,
+        description,
+        priority,
+      });
+      setTasks((t) => t.map((task) => (task.id === id ? response.data : task)));
+      return true;
+    } catch (error) {
+      console.error(
+        "Error updating data:",
+        error.response?.data ?? error.message
+      );
+      return false;
+    }
+  }
 
+  function openEditForm(task) {
+    setEditingTaskId(task.id);
+    setName(task.name);
+    setDescription(task.description);
+    setPriority(task.priority);
+    setEditTaskMode(true);
+  }
+
+  function ExitEditTaskMode() {
+    setName("");
+    setDescription("");
+    setPriority("High");
+    setEditingTaskId(null);
+    setEditTaskMode(false);
+  }
+
+  async function handleEditSubmit(e) {
+    e.preventDefault();
+    if (name.trim() === "") return;
+    const ok = await UpdateData(editingTaskId);
+    if (ok) ExitEditTaskMode();
+  }
 
   function openAddTask() {
     setAddFormIsOpen(true);
@@ -64,50 +137,37 @@ function ToDoList() {
     setAddFormIsOpen(false);
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    addTask();
-    closeAddTask();
-  }
-
   function handleSubmitDate(event) {
     event.preventDefault();
-    setday(selected);
+    if (selected) setday(selected);
     setIsDateSelectorOpen(false);
   }
 
-  function addTask() {
-    if (newTaskText.trim() !== "") {
-      const newTask = {
-        index: `el-${crypto.randomUUID()}`,
-        text: newTaskText,
-        priority: newTaskPriority,
-      };
-      setNewTaskText("");
-      setTasks((t) => [...t, newTask]);
-    }
+  function swapDeleteTaskMode() {
+    setDeleteTaskMode((mode) => !mode);
   }
 
-  function deleteTask(index) {
-    setTasks(tasks.filter((_, i) => i !== index));
-  }
-
-  const [isDateSelectorOpen, setIsDateSelectorOpen] = useState(false);
-  
-  const [day, setday] = useState(new Date());
-  const [selected, setSelected] = useState(new Date());
-   
   return (
     <>
       <NavBar />
       <div className="ToDoList">
-        <button className="SubtleButton Text" onClick={() => setIsDateSelectorOpen(true)}>{day.toLocaleDateString()}</button> 
-        {isDateSelectorOpen &&
+        <button
+          className="SubtleButton Text"
+          onClick={() => setIsDateSelectorOpen(true)}
+        >
+          {day.toLocaleDateString()}
+        </button>
+
+        {isDateSelectorOpen && (
           <div className="Overlay">
-            <modal className="AddForm">
+            <div className="AddForm">
               <form className="AddFormContent" onSubmit={handleSubmitDate}>
-                <button className="ExitButton" type="button" onClick={() => setIsDateSelectorOpen(false)}> {/* Save Tasks to the day */}
-                  <img src={CloseIcon} />
+                <button
+                  className="ExitButton"
+                  type="button"
+                  onClick={() => setIsDateSelectorOpen(false)}
+                >
+                  <img src={CloseIcon} alt="Close" />
                 </button>
                 <DayPicker
                   mode="single"
@@ -115,23 +175,70 @@ function ToDoList() {
                   onSelect={setSelected}
                   defaultMonth={new Date()}
                   footer={
-                    selected ? `Selected: ${selected.toLocaleDateString()}` : "Pick a day."
+                    selected
+                      ? `Selected: ${selected.toLocaleDateString()}`
+                      : "Pick a day."
                   }
                 />
                 <button type="submit" className="SubtleButton">
                   Submit
                 </button>
               </form>
-            </modal>
+            </div>
           </div>
-        }
+        )}
+
+        {editTaskMode && (
+          <div className="Overlay">
+            <div className="AddForm">
+              <button
+                className="ExitButton"
+                type="button"
+                onClick={ExitEditTaskMode}
+              >
+                <img src={CloseIcon} alt="Close" />
+              </button>
+              <form className="AddFormContent" onSubmit={handleEditSubmit}>
+                <input
+                  className="FormInputText"
+                  type="text"
+                  autoFocus
+                  placeholder="Enter Task Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <label htmlFor="EditPriority">Priority </label>
+                <select
+                  name="Priority"
+                  id="EditPriority"
+                  className="FormInputPriority"
+                  value={priority}
+                  onChange={(e) => setPriority(e.target.value)}
+                >
+                  <option value="High">High</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Low">Low</option>
+                </select>
+                <div>
+                  <button type="submit" className="SubtleButton Text">
+                    Save
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+
         {AddFormisOpen && (
           <div className="Overlay">
-            <modal className="AddForm">
-              <button className="ExitButton" onClick={closeAddTask}> {/* Make it so anywhere you click it closes and turn div Add Form to Modal*/}
-                <img src={CloseIcon} />
+            <div className="AddForm">
+              <button
+                className="ExitButton"
+                type="button"
+                onClick={closeAddTask}
+              >
+                <img src={CloseIcon} alt="Close" />
               </button>
-
               <form className="AddFormContent" onSubmit={WriteData}>
                 <input
                   className="FormInputText"
@@ -140,8 +247,8 @@ function ToDoList() {
                   placeholder="Enter Task Name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                ></input>
-                <label for="Priority">Priority </label>
+                />
+                <label htmlFor="Priority">Priority </label>
                 <select
                   name="Priority"
                   id="Priority"
@@ -159,23 +266,51 @@ function ToDoList() {
                   </button>
                 </div>
               </form>
-            </modal>
+            </div>
           </div>
         )}
+
         <ol className="Task-List">
-          {tasks.map((task) => (
-            <li className="Task" key={task.id}>
-              <input type="checkbox" className="Checkbox"></input>
-              {/* () => becasue without ity it calles the function instantly */}
+          {visibleTasks.map((task) => (
+            <li
+              className="Task"
+              key={task.id}
+              onDoubleClick={() => openEditForm(task)}
+            >
+              <input
+                type="checkbox"
+                className="Checkbox"
+                checked={task.done}
+                onChange={() =>
+                  UpdateCheckBoxState(task.id, { done: !task.done })
+                }
+                onDoubleClick={(e) => e.stopPropagation()}
+              />
               <span className="Task-Name">{task.name}</span>
               <span className="Priority">{task.priority}</span>
+              {deleteTaskMode && (
+                <span className="Delete">
+                  <button
+                    className="DeleteTaskButton"
+                    onClick={() => DeleteData(task.id)}
+                  >
+                    Delete Task
+                  </button>
+                </span>
+              )}
             </li>
           ))}
         </ol>
+        {visibleTasks.length === 0 && (
+          <p className="Text">Relax No Tasks For Today.</p>
+        )}
+
         <button className="SubtleButton Text" onClick={openAddTask}>
           + Add a task
         </button>
-        {/* Add a delete task button which adds a checkbox and a final delete button actually deleting all elements selected*/}
+        <button className="SubtleButton Text" onClick={swapDeleteTaskMode}>
+          - Delete a task
+        </button>
       </div>
     </>
   );

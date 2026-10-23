@@ -9,6 +9,12 @@
 .Text {
   color: var(--text-color);
 }
+.DeleteTaskButton {
+  color: white;
+  background-color: rgb(164, 14, 14);
+  padding: .25rem;
+  border-radius: .25rem;
+}
 .ControleCenterButton {
   margin-left: 2.5rem;
   display: flex;

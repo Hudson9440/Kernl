@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 class Task(models.Model):
@@ -8,6 +9,7 @@ class Task(models.Model):
     description = models.TextField(blank=True, default="")
     priority = models.CharField(max_length=10, choices=PRIORITIES, default="High")
     done = models.BooleanField(default=False)
+    date = models.DateField(default=timezone.localdate)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
