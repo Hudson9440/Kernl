@@ -7,7 +7,7 @@ import "react-day-picker/style.css";
 import "./ToDoList.css";
 import "./Global.css";
 
-const API_URL = "http://127.0.0.1:8000/api/tasks/";
+const API_URL = "/api/tasks/";
 
 function toDateKey(d) {
   const month = String(d.getMonth() + 1).padStart(2, "0");

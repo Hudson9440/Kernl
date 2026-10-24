@@ -146,6 +146,8 @@ MAILERS = {
     },
 }
 
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "kernl.your-subdomain.workers.dev"]
+
 CORS_ALLOWED_ORIGINS = [
     o for o in os.environ.get("CORS_ALLOWED_ORIGINS", "http://localhost:5173").split(",") if o
 ]

@@ -1,0 +1,23 @@
+lock-version = "1.0"
+created-by = "uv"
+requires-python = ">=3.13.2"
+
+[[packages]]
+name = "asgiref"
+version = "3.13.0"
+wheels = [{ url = "https://files.pythonhosted.org/packages/2e/b0/ec211e1f7966247cb6469158d856bac9aa4c2fe13621bd6a352e4f850453/asgiref-3.13.0-py3-none-any.whl", upload-time = 2026-10-23T08:13:13Z, size = 27593, hashes = { sha256 = "f9596a2434512686473d50f96ff6207fbba49ae1a785dfac614df4aeb085674d" } }]
+
+[[packages]]
+name = "django"
+version = "6.1.2"
+wheels = [{ url = "https://files.pythonhosted.org/packages/c9/83/90ff2dbfac7b519ed77620bdbb827cd2d1a83faf00d076bf95056428bce7/django-6.1.2-py3-none-any.whl", upload-time = 2026-10-06T12:53:17Z, size = 8420684, hashes = { sha256 = "141efee6ec64d1db6db90683bf734c550102450f444fb099063b0be1bd27d991" } }]
+
+[[packages]]
+name = "sqlparse"
+version = "0.6.0"
+wheels = [{ url = "https://files.pythonhosted.org/packages/d9/50/f00935da0ec7cbf325f8dc4f772ae46fbc7b672dd62876e73f0a94adda57/sqlparse-0.6.0-py3-none-any.whl", upload-time = 2026-08-13T19:16:04Z, size = 50070, hashes = { sha256 = "b861c0288ce2fa56209a9a6412d2e066ac664b3873b89c26c9d8415e8e32996f" } }]
+
+[[packages]]
+name = "workers-runtime-sdk"
+version = "1.9.5"
+wheels = [{ url = "https://files.pythonhosted.org/packages/ad/33/1154f8d518becf3ca3dea57627dea7a84888937cf7b313e6dc4e6f7c7fdf/workers_runtime_sdk-1.9.5-py3-none-any.whl", upload-time = 2026-10-20T07:54:21Z, size = 41297, hashes = { sha256 = "f2b912660a3ab60d2a24920106422f9eaf4cd7a794e42b022237ad2444287fef" } }]
