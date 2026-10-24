@@ -1,14 +1,12 @@
-interface Env {
-  ASSETS: Fetcher;
-  BACKEND: Fetcher;
-}
+import { createRequestHandler } from "react-router";
+
+const requestHandler = createRequestHandler(
+  () => import("virtual:react-router/server-build"),
+  import.meta.env.MODE,
+);
 
 export default {
-  async fetch(request: Request, env: Env) {
-    const url = new URL(request.url);
-    if (url.pathname.startsWith("/api/")) {
-      return env.BACKEND.fetch(request);   // goes to Django
-    }
-    return env.ASSETS.fetch(request);      // everything else is your React app
+  async fetch(request) {
+    return requestHandler(request);
   },
 } satisfies ExportedHandler<Env>;
